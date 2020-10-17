@@ -1,9 +1,9 @@
 package leetcode
 
 func twoSum(nums []int, target int) []int {
-	for i := 0; i < len(nums); i++ {
+	for i, v := range nums {
 		for j := i + 1; j < len(nums); j++ {
-			if nums[i]+nums[j] == target {
+			if v+nums[j] == target {
 				return []int{i, j}
 			}
 		}
