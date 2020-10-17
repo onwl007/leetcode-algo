@@ -1,12 +1,12 @@
 package leetcode
 
 func twoSum(nums []int, target int) []int {
+	m := make(map[int]int)
 	for i, v := range nums {
-		for j := i + 1; j < len(nums); j++ {
-			if v+nums[j] == target {
-				return []int{i, j}
-			}
+		if j, ok := m[target-v]; ok {
+			return []int{j, i}
 		}
+		m[v] = i
 	}
 	return nil
 }
