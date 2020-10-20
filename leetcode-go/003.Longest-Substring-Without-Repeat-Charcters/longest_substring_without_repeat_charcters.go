@@ -9,19 +9,19 @@ func main() {
 func lengthOfLongestSubstring(s string) int {
 	fmt.Println(s)
 	length := len(s)
-	i, j := 0, 0
+	i, j, k := 0, 0, 0
 	maxlen := 0 // 存储当前窗口最长子串的长度
-	for i = 0; i < length; i++ {
-		for j = i + 1; j < length; j++ {
-			fmt.Println(string(s[i]))
-			if s[i] == s[j] {
-				i++
+	for j = 0; j < length; j++ {
+		for k = i; k < j; k++ {
+			fmt.Println(string(s[j]))
+			if s[k] == s[j] {
+				i = k + 1
 				break
-			} else {
-				maxlen = j - i + 1
 			}
 		}
-		maxlen = max(maxlen, j-i+1)
+		if (j - i + 1) > maxlen {
+			maxlen = j - i + 1
+		}
 	}
 	fmt.Println("max", maxlen)
 	return maxlen
