@@ -1,4 +1,4 @@
-package leetcode
+package main
 
 import (
 	"github.com/onwl007/leetcode-algo/structures"
