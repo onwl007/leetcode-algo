@@ -2,18 +2,23 @@ package leetcode
 
 func lengthOfLongestSubstring(s string) int {
 	s = "abcabcbb"
-	max := 0
-	for i := 0; i < len(s); i++ {
-		for j := i; i < len(s); j++ {
-			if s[i] == s[j] {
+	m := make(map[byte]int)
+	length := len(s)
+	maxlen := 0 // 存储当前窗口最长子串的长度
+	for i := 0; i < length; i++ {
+		for j := i; j < length; j++ {
+			if _, ok := m[s[j]]; ok {
 				break
-			}
-			if j-i+1 > max {
-				max = j - i + 1
+			} else {
+				m[s[j]] = j
 			}
 		}
+		maxlen = max(maxlen, len(m))
+		if maxlen >= length-1-i {
+			break
+		}
 	}
-	return max
+	return maxlen
 }
 
 func max(a, b int) int {
