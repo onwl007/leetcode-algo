@@ -7,16 +7,16 @@ func main() {
 func lengthOfLongestSubstring(s string) int {
 	length := len(s)
 	maxlen := 0
-	left, right, tmp := 0, 0, 0
-	for left = 0; left < length; left++ {
-		for right = tmp; right < left; right++ {
-			if s[right] == s[left] {
-				tmp = right + 1
+	l, r := 0, 0
+	for ; r < length; r++ {
+		for i := l; i < r; i++ {
+			if s[r] == s[i] {
+				l = i + 1
 				break
 			}
 		}
-		if (left - tmp + 1) > maxlen {
-			maxlen = left - tmp + 1
+		if (r - l + 1) > maxlen {
+			maxlen = r - l + 1
 		}
 	}
 	return maxlen
