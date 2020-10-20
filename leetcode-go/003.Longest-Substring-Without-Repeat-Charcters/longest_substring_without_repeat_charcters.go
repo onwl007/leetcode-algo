@@ -1,35 +1,23 @@
 package main
 
-import "fmt"
-
 func main() {
 	lengthOfLongestSubstring("abcabcbb")
 }
 
 func lengthOfLongestSubstring(s string) int {
-	fmt.Println(s)
 	length := len(s)
-	i, j, k := 0, 0, 0
-	maxlen := 0 // 存储当前窗口最长子串的长度
-	for j = 0; j < length; j++ {
-		for k = i; k < j; k++ {
-			fmt.Println(string(s[j]))
-			if s[k] == s[j] {
-				i = k + 1
+	maxlen := 0
+	left, right, tmp := 0, 0, 0
+	for left = 0; left < length; left++ {
+		for right = tmp; right < left; right++ {
+			if s[right] == s[left] {
+				tmp = right + 1
 				break
 			}
 		}
-		if (j - i + 1) > maxlen {
-			maxlen = j - i + 1
+		if (left - tmp + 1) > maxlen {
+			maxlen = left - tmp + 1
 		}
 	}
-	fmt.Println("max", maxlen)
 	return maxlen
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
 }
