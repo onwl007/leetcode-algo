@@ -21,3 +21,25 @@ func lengthOfLongestSubstring(s string) int {
 	}
 	return maxlen
 }
+
+func lengthOfLongestSubstring2(s string) int {
+	maxlen := 0
+	length := len(s)
+	m := make(map[byte]int)
+	l := 0
+	for r := 0; r < length; r++ {
+		if _, ok := m[s[r]]; ok {
+			l = max(m[s[r]], l)
+		}
+		maxlen = max(maxlen, r-l+1)
+		m[s[r]] = r + 1
+	}
+	return maxlen
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
