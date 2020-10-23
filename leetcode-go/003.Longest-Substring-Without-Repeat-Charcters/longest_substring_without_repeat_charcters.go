@@ -1,9 +1,5 @@
 package main
 
-func main() {
-	lengthOfLongestSubstring("abcabcbb")
-}
-
 func lengthOfLongestSubstring(s string) int {
 	length := len(s)
 	maxlen := 0
