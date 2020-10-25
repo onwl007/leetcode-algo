@@ -1,26 +1,14 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
-
 func isPalindrome(x int) bool {
-	s := strconv.Itoa(x)
-	rs := reverse(s)
-	for i := 0; i < len(s); i++ {
-		if s[i] != rs[i] {
-			return false
-		}
+	if x < 0 || (x%10 == 0 && x != 0) {
+		return false
 	}
-	return true
-}
 
-func reverse(str string) string {
-	var result string
-	strLen := len(str)
-	for i := 0; i < strLen; i++ {
-		result = result + fmt.Sprintf("%c", str[strLen-i-1])
+	revertedNumber := 0
+	for x > revertedNumber {
+		revertedNumber = revertedNumber*10 + x%10
+		x /= 10
 	}
-	return result
+	return x == revertedNumber || x == revertedNumber/10
 }
