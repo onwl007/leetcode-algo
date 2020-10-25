@@ -1,14 +1,14 @@
 package main
 
-import "strconv"
-
 func isPalindrome(x int) bool {
-	str := strconv.Itoa(x)
-	length := len(str)
-	for i := range str {
-		if str[length-i-1] != str[i] {
-			return false
-		}
+	if x < 0 || (x%10 == 0 && x != 0) {
+		return false
 	}
-	return true
+
+	revertNum := 0
+	for x > revertNum {
+		revertNum = revertNum*10 + x%10
+		x /= 10
+	}
+	return x == revertNum || x == revertNum/10
 }
