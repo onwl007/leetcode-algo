@@ -1,22 +1,22 @@
 package main
 
 func maxArea(height []int) int {
-	max, start, end := 0, 0, len(height)-1
-	for start < end {
-		width := end - start
-		high := 0
-		if height[start] < height[end] {
-			high = height[start]
-			start++
-		} else {
-			high = height[end]
-			end--
-		}
-
-		tmp := width * high
-		if tmp > max {
-			max = tmp
+	max := 0
+	for i := 0; i < len(height); i++ {
+		for j := i + 1; j < len(height); j++ {
+			width := j - i
+			tmp := width * min(height[i], height[j])
+			if tmp > max {
+				max = tmp
+			}
 		}
 	}
 	return max
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
