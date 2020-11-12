@@ -42,6 +42,50 @@ func searchLastEqual(nums []int, target int) int {
 	return -1
 }
 
+func leftBound(nums []int, target int) int {
+	left, right := 0, len(nums)-1
+	// 搜索区间 [left, right]
+	for left <= right {
+		mid := left + (right-left)/2
+		if nums[mid] < target {
+			// 搜索区间变为 [mid+1, right]
+			left = mid + 1
+		} else if nums[mid] > target {
+			// 搜索区间变为 [left, mid-1]
+			right = mid - 1
+		} else if nums[mid] == target {
+			// 搜索右侧边界
+			right = mid - 1
+		}
+	}
+
+	// 检查出界情况
+	if left >= len(nums) || nums[left] != target {
+		return -1
+	}
+	return left
+}
+
+func rightBound(nums []int, target int) int {
+	left, right := 0, len(nums)-1
+	for left <= right {
+		mid := left + (right-left)/2
+		if nums[mid] < target {
+			left = mid + 1
+		} else if nums[mid] > target {
+			right = mid - 1
+		} else if nums[mid] == target {
+			// 收缩左侧边界
+			left = mid + 1
+		}
+	}
+	// 这里改为检查 right 越界的情况
+	if right < 0 || nums[right] != target {
+		return -1
+	}
+	return right
+}
+
 // 这样也能实现，但不符合题目时间复杂度为 Ologn 的要求
 func searchRange1(nums []int, target int) []int {
 	start, end := -1, -1
