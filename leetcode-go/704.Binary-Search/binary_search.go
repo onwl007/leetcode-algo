@@ -1,6 +1,6 @@
 package main
 
-// 标准二分查找，适合有序数组
+// 标准二分查找，适合升序有序数组
 func search(nums []int, target int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {
