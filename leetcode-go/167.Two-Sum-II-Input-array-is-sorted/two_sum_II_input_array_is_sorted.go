@@ -18,3 +18,22 @@ func twoSum(numbers []int, target int) []int {
 	}
 	return []int{-1, -1}
 }
+
+// 双指针法，定义左右两个指针，判断两个的和是否等于 target
+// 数组有序
+// 当和大于 target 时，说明右指针指向的值比较大，需要左移
+// 当和小于 target 时，说明左指针指向的值比较小，需要右移
+func twoSum1(numbers []int, target int) []int {
+	left, right := 0, len(numbers)-1
+	for left <= right {
+		sum := numbers[left] + numbers[right]
+		if sum == target {
+			return []int{left + 1, right + 1}
+		} else if sum > target {
+			right--
+		} else if sum < target {
+			left++
+		}
+	}
+	return []int{-1, -1}
+}
