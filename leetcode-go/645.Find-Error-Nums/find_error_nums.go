@@ -1,5 +1,7 @@
 package main
 
+import "sort"
+
 // 使用 map
 func findErrorNums(nums []int) []int {
 	res := []int{}
@@ -57,6 +59,24 @@ func findErrorNums2(nums []int) []int {
 		if dup > 0 && missing > 0 {
 			break
 		}
+	}
+	return []int{dup, missing}
+}
+
+// 排序
+// 排序后，相等的两个数字将会连续出现。检查相邻的两个数字是否只相差 1 可以找到缺失的数字
+func findErrorNums3(nums []int) []int {
+	sort.Ints(nums)
+	dup, missing := -1, 1
+	for i := 1; i < len(nums); i++ {
+		if nums[i] == nums[i-1] {
+			dup = nums[i]
+		} else if nums[i] > nums[i-1]+1 {
+			missing = nums[i-1] + 1
+		}
+	}
+	if nums[len(nums)-1] != len(nums) {
+		missing = len(nums)
 	}
 	return []int{dup, missing}
 }
