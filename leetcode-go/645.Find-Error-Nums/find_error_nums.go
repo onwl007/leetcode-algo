@@ -12,7 +12,7 @@ func findErrorNums(nums []int) []int {
 		}
 		m[v] = struct{}{}
 	}
-	for i, _ := range nums {
+	for i := range nums {
 		if _, ok := m[i+1]; !ok {
 			res = append(res, i+1)
 		}
