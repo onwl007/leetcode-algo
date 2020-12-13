@@ -25,3 +25,22 @@ func isBST(root *TreeNode, min *TreeNode, max *TreeNode) bool {
 	}
 	return isBST(root.Left, min, root) && isBST(root.Right, root, max)
 }
+
+var pre = 0
+
+func isValidBST1(root *TreeNode) bool {
+	return inorder(root)
+}
+
+func inorder(root *TreeNode) bool {
+	if root == nil {
+		return true
+	}
+	l := inorder(root.Left)
+	if root.Val <= pre {
+		return false
+	}
+	pre = root.Val
+	r := inorder(root.Right)
+	return l && r
+}
