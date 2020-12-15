@@ -36,3 +36,31 @@ func min(a, b int) int {
 	}
 	return b
 }
+
+// 广度优先搜索解法
+func minDepthBFS(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	queue := []*TreeNode{root}
+	// root 本身就是一层，将 depth 初始化为 1
+	depth := 1
+	for len(queue) != 0 {
+		size := len(queue)
+		for i := 0; i < size; i++ {
+			cur := queue[0]   // 取队列第一个元素
+			queue = queue[1:] // 相当于队列第一个元素出队
+			if cur.Left != nil && cur.Right != nil {
+				return depth
+			}
+			if cur.Left != nil {
+				queue = append(queue, cur.Left)
+			}
+			if cur.Right != nil {
+				queue = append(queue, cur.Right)
+			}
+		}
+		depth++
+	}
+	return depth
+}
