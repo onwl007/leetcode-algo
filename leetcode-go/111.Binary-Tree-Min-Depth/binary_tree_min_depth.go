@@ -50,7 +50,7 @@ func minDepthBFS(root *TreeNode) int {
 		for i := 0; i < size; i++ {
 			cur := queue[0]   // 取队列第一个元素
 			queue = queue[1:] // 相当于队列第一个元素出队
-			if cur.Left != nil && cur.Right != nil {
+			if cur.Left == nil && cur.Right == nil {
 				return depth
 			}
 			if cur.Left != nil {
