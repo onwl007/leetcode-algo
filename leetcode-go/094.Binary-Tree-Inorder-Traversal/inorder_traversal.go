@@ -17,3 +17,32 @@ func inorderTraversal(root *TreeNode) (vals []int) {
 	inorder(root)
 	return vals
 }
+
+func inorderTraversal1(root *TreeNode) (vals []int) {
+	inorder(&vals, root)
+	return
+}
+
+func inorder(vals *[]int, root *TreeNode) {
+	if root == nil {
+		return
+	}
+	inorder(vals, root.Left)
+	*vals = append(*vals, root.Val)
+	inorder(vals, root.Right)
+}
+
+func inorderIteration(root *TreeNode) (vals []int) {
+	stack := []*TreeNode{}
+	for len(stack) > 0 || root != nil {
+		for root != nil {
+			stack = append(stack, root)
+			root = root.Left
+		}
+		root = stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		vals = append(vals, root.Val)
+		root = root.Right
+	}
+	return
+}
