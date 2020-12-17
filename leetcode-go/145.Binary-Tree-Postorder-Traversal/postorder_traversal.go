@@ -17,3 +17,17 @@ func postorderTraversal(root *TreeNode) (vals []int) {
 	postorder(root)
 	return
 }
+
+func postorderTraversal1(root *TreeNode) (vals []int) {
+	postorder(&vals, root)
+	return
+}
+
+func postorder(vals *[]int, root *TreeNode) {
+	if root == nil {
+		return
+	}
+	postorder(vals, root.Left)
+	postorder(vals, root.Right)
+	*vals = append(*vals, root.Val)
+}
