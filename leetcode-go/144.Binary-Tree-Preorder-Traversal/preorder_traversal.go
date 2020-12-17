@@ -49,3 +49,22 @@ func preorderTraversalIteration(root *TreeNode) []int {
 	}
 	return vals
 }
+
+func preorderIteration(root *TreeNode) (vals []int) {
+	if root == nil {
+		return
+	}
+	stack := []*TreeNode{root}
+	for len(stack) > 0 {
+		node := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		vals = append(vals, node.Val)
+		if node.Right != nil {
+			stack = append(stack, node.Right)
+		}
+		if node.Left != nil {
+			stack = append(stack, node.Left)
+		}
+	}
+	return
+}
