@@ -8,12 +8,12 @@ type TreeNode = structures.TreeNode
 // 二叉搜索树，根节点大于左子树所有的值，小于右子树所有的值
 // 当 p，q 同时小于根节点，递归左子树
 // 当 p，q 同时大于根节点，递归右子树
-func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+func lowestCommonAncestorRecurison(root, p, q *TreeNode) *TreeNode {
 	if p.Val < root.Val && q.Val < root.Val {
-		return lowestCommonAncestor(root.Left, p, q)
+		return lowestCommonAncestorRecurison(root.Left, p, q)
 	}
 	if p.Val > root.Val && q.Val > root.Val {
-		return lowestCommonAncestor(root.Right, p, q)
+		return lowestCommonAncestorRecurison(root.Right, p, q)
 	}
 	return root
 }
