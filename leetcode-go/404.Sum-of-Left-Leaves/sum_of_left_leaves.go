@@ -21,3 +21,22 @@ func dfs(root *TreeNode, sum *int) {
 	dfs(root.Left, sum)
 	dfs(root.Right, sum)
 }
+
+func sumOfRightLeaves(root *TreeNode) int {
+	sum := 0
+	dfs1(root, &sum)
+	return sum
+}
+
+func dfs1(root *TreeNode, sum *int) {
+	if root == nil {
+		return
+	}
+	// 右叶子
+	// 节点的右节点不为空，右节点的左节点和右节点同时为空
+	if root.Right != nil && root.Right.Left == nil && root.Right.Right == nil {
+		*sum += root.Right.Val
+	}
+	dfs1(root.Left, sum)
+	dfs1(root.Right, sum)
+}
