@@ -59,3 +59,29 @@ func largestValues1(root *TreeNode) []int {
 	}
 	return vals
 }
+
+func largestValuesRecurison(root *TreeNode) []int {
+	vals := []int{}
+	dfs(root, &vals, 0)
+	return vals
+}
+
+func dfs(root *TreeNode, vals *[]int, level int) {
+	if root == nil {
+		return
+	}
+
+	if len(*vals) == level {
+		*vals = append(*vals, root.Val)
+	}
+	(*vals)[level] = max((*vals)[level], root.Val)
+	dfs(root.Left, vals, level+1)
+	dfs(root.Right, vals, level+1)
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
