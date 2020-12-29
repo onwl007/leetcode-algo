@@ -11,7 +11,7 @@ type ListNode struct {
 }
 
 // List2Ints convert List to []int
-func List2Ints(head *ListNode) []int {
+func ListNode2Ints(head *ListNode) []int {
 	limit := 100
 	times := 0
 	res := []int{}
@@ -31,7 +31,7 @@ func List2Ints(head *ListNode) []int {
 }
 
 // Ints2List convert []int to List
-func Ints2List(nums []int) *ListNode {
+func Ints2ListNode(nums []int) *ListNode {
 	if len(nums) == 0 {
 		return nil
 	}
