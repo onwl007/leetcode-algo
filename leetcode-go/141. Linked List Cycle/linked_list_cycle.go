@@ -21,8 +21,22 @@ func hasCycle(head *ListNode) bool {
 	return true
 }
 
-// 哈希表
+// 快慢指针也可以都从头结点开始
+// 先移动指针，再比较
 func hasCycle1(head *ListNode) bool {
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+		if slow == fast {
+			return true
+		}
+	}
+	return false
+}
+
+// 哈希表
+func hasCycle2(head *ListNode) bool {
 	m := make(map[*ListNode]struct{})
 	for head != nil {
 		if _, ok := m[head]; ok {
