@@ -20,6 +20,7 @@ func deleteDuplicates(head *ListNode) *ListNode {
 	}
 
 	vals := []int{}
+	// golang 每次遍历 map 的顺序是不一样的
 	for k, v := range m {
 		if v == 1 {
 			vals = append(vals, k)
