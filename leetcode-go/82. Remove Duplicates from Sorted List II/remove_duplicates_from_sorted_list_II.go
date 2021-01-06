@@ -16,12 +16,13 @@ func deleteDuplicates(head *ListNode) *ListNode {
 		} else {
 			m[head.Val] = 1
 		}
+		head = head.Next
 	}
 
 	vals := []int{}
-	for _, v := range m {
+	for k, v := range m {
 		if v == 1 {
-			vals = append(vals, v)
+			vals = append(vals, k)
 		}
 	}
 	sort.Ints(vals)
