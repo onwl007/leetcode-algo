@@ -13,6 +13,7 @@ func main() {
 	for _, f := range files {
 		fileNames = append(fileNames, f.Name())
 	}
+	fmt.Printf("目前为止总共做了 %v 道题\n", len(fileNames))
 	n := getRandNumber(len(fileNames))
 	fmt.Printf("生成的随机题目是 ----- %v\n", fileNames[n])
 }
