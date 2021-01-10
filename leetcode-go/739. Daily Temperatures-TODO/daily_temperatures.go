@@ -4,6 +4,7 @@ package main
 // 每次只跟元素的后面的元素比较大小
 // 当前元素比后面一个元素的要小时，直接记录索引的差值即可，然后立刻退出第二重循环
 // 进行下一个元素的比较
+// TODO: 找到更好的解法
 func dailyTemperatures(T []int) []int {
 	vals := make([]int, len(T))
 
