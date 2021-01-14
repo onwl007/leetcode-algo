@@ -8,6 +8,21 @@ import (
 
 type TreeNode = structures.TreeNode
 
+/*
+ * @lc app=leetcode.cn id=872 lang=golang
+ *
+ * [872] 叶子相似的树
+ */
+
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
 func leafSimilar(root1 *TreeNode, root2 *TreeNode) bool {
 	vals1 := []int{}
 	vals2 := []int{}
@@ -27,3 +42,5 @@ func dfs(root *TreeNode, vals *[]int) {
 	dfs(root.Left, vals)
 	dfs(root.Right, vals)
 }
+
+// @lc code=end
