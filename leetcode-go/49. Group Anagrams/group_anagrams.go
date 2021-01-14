@@ -7,8 +7,11 @@ import "sort"
  *
  * [49] 字母异位词分组
  */
+
+// @lc code=start
 func groupAnagrams(strs []string) [][]string {
 	m := make(map[string][]string)
+	var vals [][]string
 	for _, str := range strs {
 		s := []byte(str)
 		sort.Slice(s, func(i, j int) bool {
@@ -17,9 +20,10 @@ func groupAnagrams(strs []string) [][]string {
 		m[string(s)] = append(m[string(s)], str)
 	}
 
-	var res [][]string
 	for _, v := range m {
-		res = append(res, v)
+		vals = append(vals, v)
 	}
-	return res
+	return vals
 }
+
+// @lc code=end
