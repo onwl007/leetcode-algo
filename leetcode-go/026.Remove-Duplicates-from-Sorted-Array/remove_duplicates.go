@@ -1,5 +1,21 @@
 package main
 
+import "fmt"
+
+func main() {
+	arr1 := []int{1, 1, 2}
+	arr2 := []int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}
+	fmt.Println(removeDuplicates(arr1))
+	fmt.Println(removeDuplicates(arr2))
+}
+
+/*
+ * @lc app=leetcode.cn id=26 lang=golang
+ *
+ * [26] 删除排序数组中的重复项
+ */
+
+// @lc code=start
 func removeDuplicates(nums []int) int {
 	n := len(nums)
 	if n == 0 {
@@ -15,3 +31,5 @@ func removeDuplicates(nums []int) int {
 	}
 	return i + 1
 }
+
+// @lc code=end
