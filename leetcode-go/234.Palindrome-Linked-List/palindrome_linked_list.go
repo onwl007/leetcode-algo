@@ -8,6 +8,27 @@ import (
 
 type ListNode = structures.ListNode
 
+func main() {
+	arr := []int{1, 1, 2, 1}
+	res := isPalindrome(structures.Ints2ListNode(arr))
+	dfs(structures.Ints2ListNode(arr))
+	fmt.Println(res)
+}
+
+/*
+ * @lc app=leetcode.cn id=234 lang=golang
+ *
+ * [234] 回文链表
+ */
+
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
 func isPalindrome(head *ListNode) bool {
 	vals := []int{}
 	for ; head != nil; head = head.Next {
@@ -22,6 +43,8 @@ func isPalindrome(head *ListNode) bool {
 	}
 	return true
 }
+
+// @lc code=end
 
 var left *ListNode
 
