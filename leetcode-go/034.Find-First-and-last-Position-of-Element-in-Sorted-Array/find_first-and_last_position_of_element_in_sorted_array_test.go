@@ -1,42 +1,31 @@
 package main
 
 import (
-	"fmt"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
-type question34 struct {
-	para34
-	ans34
-}
-
-type para34 struct {
+type Pas struct {
 	nums   []int
 	target int
 }
 
-type ans34 struct {
-	one []int
+type Case struct {
+	in  Pas
+	out []int
 }
 
 func Test_Problem34(t *testing.T) {
-	qs := []question34{
-
-		{
-			para34{[]int{5, 7, 7, 8, 8, 10}, 8},
-			ans34{[]int{3, 4}},
-		},
-
-		{
-			para34{[]int{5, 7, 7, 8, 8, 10}, 6},
-			ans34{[]int{-1, -1}},
-		},
+	qs := []Case{
+		{in: Pas{nums: []int{5, 7, 7, 8, 8, 10}, target: 8}, out: []int{3, 4}},
+		{in: Pas{nums: []int{5, 7, 7, 8, 8, 10}, target: 6}, out: []int{-1, -1}},
 	}
 
-	fmt.Printf("------------------------Leetcode Problem 34------------------------\n")
-	for _, q := range qs {
-		_, p := q.ans34, q.para34
-		fmt.Printf("[intput]:%v      [output]:%v\n", p, searchRange(p.nums, p.target))
+	ast := assert.New(t)
+
+	for _, v := range qs {
+		ast.Equal(v.out, searchRange(v.in.nums, v.in.target), "在排序数组中查找元素的第一个和最后一个位置")
+		ast.Equal(v.out, searchRange1(v.in.nums, v.in.target), "在排序数组中查找元素的第一个和最后一个位置")
 	}
-	fmt.Printf("\n\n\n")
 }

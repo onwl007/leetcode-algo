@@ -1,46 +1,56 @@
 package main
 
+/*
+ * @lc app=leetcode.cn id=34 lang=golang
+ *
+ * [34] 在排序数组中查找元素的第一个和最后一个位置
+ */
+
+// @lc code=start
 func searchRange(nums []int, target int) []int {
-	return []int{searchFistEqual(nums, target), searchLastEqual(nums, target)}
+	return []int{bsearchLeft(nums, target), bsearchRight(nums, target)}
 }
 
 // 二分查找找第一个等于的元素的位置
-func searchFistEqual(nums []int, target int) int {
-	lo, hi := 0, len(nums)-1
-	for lo <= hi {
-		mid := lo + (hi-hi)/2
-		if target < nums[mid] {
-			hi = mid - 1
-		} else if target > nums[mid] {
-			lo = mid + 1
-		} else {
+func bsearchLeft(nums []int, target int) int {
+	left, right := 0, len(nums)-1
+	for left <= right {
+		mid := left + (right-left)>>1
+		if target > nums[mid] {
+			left = mid + 1
+		} else if target < nums[mid] {
+			right = mid - 1
+		} else if target == nums[mid] {
 			if mid == 0 || nums[mid-1] != target {
 				return mid
+			} else {
+				right = mid - 1
 			}
-			hi = mid - 1
 		}
 	}
 	return -1
 }
 
-// 二分查找最后一个等于的元素的位置
-func searchLastEqual(nums []int, target int) int {
-	lo, hi := 0, len(nums)-1
-	for lo <= hi {
-		mid := lo + (hi-hi)/2
-		if target < nums[mid] {
-			hi = mid - 1
-		} else if target > nums[mid] {
-			lo = mid + 1
-		} else {
+func bsearchRight(nums []int, target int) int {
+	left, right := 0, len(nums)-1
+	for left <= right {
+		mid := left + (right-left)>>1
+		if target > nums[mid] {
+			left = mid + 1
+		} else if target < nums[mid] {
+			right = mid - 1
+		} else if target == nums[mid] {
 			if mid == len(nums)-1 || nums[mid+1] != target {
 				return mid
+			} else {
+				left = mid + 1
 			}
-			lo = mid + 1
 		}
 	}
 	return -1
 }
+
+// @lc code=end
 
 func leftBound(nums []int, target int) int {
 	left, right := 0, len(nums)-1
