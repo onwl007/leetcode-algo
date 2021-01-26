@@ -1,9 +1,38 @@
 package main
 
-import "github.com/onwl007/leetcode-algo/structures"
+import (
+	"fmt"
+
+	"github.com/onwl007/leetcode-algo/structures"
+)
 
 type TreeNode = structures.TreeNode
 
+func main() {
+	arr := []int{1, 3, 2, 5, 3, structures.NULL, 9}
+	vals1 := largestValues(structures.Ints2TreeNode(arr))
+	vals2 := largestValues1(structures.Ints2TreeNode(arr))
+	vals3 := largestValuesRecurison(structures.Ints2TreeNode(arr))
+	fmt.Println(vals1)
+	fmt.Println(vals2)
+	fmt.Println(vals3)
+}
+
+/*
+ * @lc app=leetcode.cn id=515 lang=golang
+ *
+ * [515] 在每个树行中找最大值
+ */
+
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
 func largestValues(root *TreeNode) []int {
 	vals := []int{}
 
@@ -32,12 +61,14 @@ func largestValues(root *TreeNode) []int {
 	return vals
 }
 
+// @lc code=end
+
 func largestValues1(root *TreeNode) []int {
+	vals := []int{}
 	if root == nil {
-		return nil
+		return vals
 	}
 
-	vals := []int{}
 	queue := []*TreeNode{root}
 	for len(queue) != 0 {
 		size := len(queue)
