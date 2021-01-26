@@ -7,6 +7,7 @@ func main() {
 	fmt.Println(res)
 }
 
+// TODO: 前缀和解法
 /*
  * @lc app=leetcode.cn id=560 lang=golang
  *
