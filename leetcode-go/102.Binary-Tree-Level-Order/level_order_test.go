@@ -22,5 +22,6 @@ func TestLevelOrder(t *testing.T) {
 	for _, v := range qs {
 		ast.Equal(v.out, levelOrder(v.in), "二叉树的层序遍历")
 		ast.Equal(v.out, levelOrder1(v.in), "二叉树的层序遍历")
+		ast.Equal(v.out, levelOrderRecursion(v.in), "二叉树的层序遍历")
 	}
 }

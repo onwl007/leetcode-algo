@@ -88,6 +88,24 @@ func levelOrder1(root *TreeNode) [][]int {
 	return ret
 }
 
+func levelOrderRecursion(root *TreeNode) [][]int {
+	vals := [][]int{}
+	dfs(root, &vals, 0)
+	return vals
+}
+
+func dfs(root *TreeNode, vals *[][]int, level int) {
+	if root == nil {
+		return
+	}
+	if len(*vals) == level {
+		*vals = append(*vals, []int{})
+	}
+	(*vals)[level] = append((*vals)[level], root.Val)
+	dfs(root.Left, vals, level+1)
+	dfs(root.Right, vals, level+1)
+}
+
 func levelOrder2(root *TreeNode) (vals []int) {
 	if root == nil {
 		return
