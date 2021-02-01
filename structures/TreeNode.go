@@ -79,3 +79,12 @@ func Ints2Node(arr []int) *Node {
 
 	return root
 }
+
+func Preorder(root *TreeNode, vals *[]int) {
+	if root == nil {
+		return
+	}
+	*vals = append(*vals, root.Val)
+	Preorder(root.Left, vals)
+	Preorder(root.Right, vals)
+}
