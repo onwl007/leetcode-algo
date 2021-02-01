@@ -42,3 +42,28 @@ func bubbleSort(nums []int) {
 	}
 }
 ```
+
+## 插入排序
+```go
+func insertSort(nums []int) {
+	if len(nums) <= 1 {
+		return
+	}
+
+	for i := 1; i < len(nums); i++ {
+		value := nums[i]
+		j := i - 1
+		// 查找插入位置
+		for ; j >= 0; j-- {
+			if nums[j] > value {
+				// 数据移动
+				nums[j+1] = nums[j]
+			} else {
+				break
+			}
+		}
+		// 插入数据
+		nums[j+1] = value
+	}
+}
+```
