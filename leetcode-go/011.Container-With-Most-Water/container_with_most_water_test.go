@@ -1,40 +1,25 @@
 package main
 
 import (
-	"fmt"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
-type question11 struct {
-	para11
-	ans11
-}
-
-type para11 struct {
-	one []int
-}
-
-type ans11 struct {
-	one int
+type Case struct {
+	height []int
+	out    int
 }
 
 func Test_Problem11(t *testing.T) {
-	qs := []question11{
-		{
-			para11{[]int{1, 8, 6, 2, 5, 4, 8, 3, 7}},
-			ans11{49},
-		},
-		{
-			para11{[]int{1, 1}},
-			ans11{1},
-		},
+	qs := []Case{
+		{height: []int{1, 8, 6, 2, 5, 4, 8, 3, 7}, out: 49},
+		{height: []int{1, 1}, out: 1},
 	}
 
-	fmt.Printf("------------------------Leetcode Problem 11------------------------\n")
-
-	for _, q := range qs {
-		_, p := q.ans11, q.para11
-		fmt.Printf("[input]: %v      [output]: %v\n", p.one, maxArea(p.one))
+	ast := assert.New(t)
+	for _, v := range qs {
+		ast.Equal(v.out, maxArea(v.height), "盛最多水的容器")
+		ast.Equal(v.out, maxArea1(v.height), "盛最多水的容器")
 	}
-	fmt.Printf("\n\n\n")
 }
