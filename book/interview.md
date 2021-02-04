@@ -9,6 +9,9 @@
 ### Context 有哪些方法，都是干什么的
 ### Docker & K8s
 ### 协程与协程之间如何通信
+1. 共享全局变量
+2. channel
+3. context
 
 # Node.js
 

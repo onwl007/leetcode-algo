@@ -4,6 +4,20 @@ import "github.com/onwl007/leetcode-algo/structures"
 
 type ListNode = structures.ListNode
 
+/*
+ * @lc app=leetcode.cn id=203 lang=golang
+ *
+ * [203] 移除链表元素
+ */
+
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
 func removeElements(head *ListNode, val int) *ListNode {
 	h := &ListNode{Val: 0, Next: head}
 	pre := h
@@ -18,3 +32,5 @@ func removeElements(head *ListNode, val int) *ListNode {
 	}
 	return h.Next
 }
+
+// @lc code=end
