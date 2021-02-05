@@ -47,9 +47,8 @@ func isValidSerialization1(preorder string) bool {
 			return false
 		}
 	}
-	if leaves != node+1 {
-		return false
-	} else {
+	if leaves == node+1 {
 		return true
 	}
+	return false
 }
