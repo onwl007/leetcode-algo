@@ -3,6 +3,13 @@ package main
 import "sort"
 
 // 使用 map
+/*
+ * @lc app=leetcode.cn id=645 lang=golang
+ *
+ * [645] 错误的集合
+ */
+
+// @lc code=start
 func findErrorNums(nums []int) []int {
 	res := []int{}
 	m := make(map[int]struct{})
@@ -19,6 +26,8 @@ func findErrorNums(nums []int) []int {
 	}
 	return res
 }
+
+// @lc code=end
 
 // 暴力法
 // 遍历 1 到 n 的所有数字，检查每个数在数组出现的次数，或未出现
