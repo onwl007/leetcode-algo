@@ -1,6 +1,7 @@
 # 二叉树
 
 ## 二叉树前中后序遍历模板
+
 ```go
 func traversal(root *TreeNode) {
   // 前序遍历
@@ -15,7 +16,8 @@ func traversal(root *TreeNode) {
 
 按照 `根节点-左子树-右子树`的访问顺序访问一颗二叉树
 
-* 递归解法
+- 递归解法
+
 ```go
 func preorderTraversal(root *TreeNode) (vals []int) {
     preorder(&vals, root)
@@ -32,11 +34,31 @@ func preorder(vals *[]int, root *TreeNode) {
 }
 ```
 
+- 迭代解法
+
+```go
+func preorderIter(root *TreeNode) []int {
+    vals := []int{}
+    stack := []*TreeNode{}
+    for len(stack) > 0 || root != nil {
+        for root != nil {
+            vals = append(vals, root.Val)
+            stack = append(stack, root.Right)
+            root = root.Left
+        }
+        root = stack[len(stack)-1]
+        stack = stack[:len(stack)-1]
+    }
+    return vals
+}
+```
+
 ## 中序遍历
 
 按照 `左子树-根节点-右子树`的访问顺序访问二叉树
 
-* 递归解法
+- 递归解法
+
 ```go
 func inorderTraversal(root *TreeNode) (vals []int) {
     inorder(&vals, root)
@@ -53,11 +75,32 @@ func inorder(vals *[]int, root *TreeNode) {
 }
 ```
 
+- 迭代解法
+
+```go
+func inorderIter(root *TreeNode) []int {
+    vals := []int{}
+    stack := []*TreeNode{}
+    for len(stack) > 0 || root != nil {
+        for root != nil {
+            stack = append(stack, root)
+            root = root.Left
+        }
+        root = stack[len(stack)-1]
+        stack = stack[:len(stack)-1]
+        vals = append(vals, root.Val)
+        root = root.Right
+    }
+    return vals
+}
+```
+
 ## 后序遍历
 
 按照 `左子树-右子树-根节点`的访问顺序访问二叉树
 
-* 递归解法
+- 递归解法
+
 ```go
 func postorderTraversal(root *TreeNode) (vals []int) {
     postorder(&vals, root)

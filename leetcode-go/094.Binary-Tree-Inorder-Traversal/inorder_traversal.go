@@ -4,33 +4,37 @@ import "github.com/onwl007/leetcode-algo/structures"
 
 type TreeNode = structures.TreeNode
 
-func inorderTraversal(root *TreeNode) (vals []int) {
-	var inorder func(*TreeNode)
-	inorder = func(node *TreeNode) {
-		if node == nil {
-			return
-		}
-		inorder(node.Left)
-		vals = append(vals, node.Val)
-		inorder(node.Right)
-	}
-	inorder(root)
+/*
+ * @lc app=leetcode.cn id=94 lang=golang
+ *
+ * [94] 二叉树的中序遍历
+ */
+
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func inorderTraversal(root *TreeNode) []int {
+	vals := []int{}
+	dfs(root, &vals)
 	return vals
 }
 
-func inorderTraversal1(root *TreeNode) (vals []int) {
-	inorder(&vals, root)
-	return
-}
-
-func inorder(vals *[]int, root *TreeNode) {
+func dfs(root *TreeNode, vals *[]int) {
 	if root == nil {
 		return
 	}
-	inorder(vals, root.Left)
+	dfs(root.Left, vals)
 	*vals = append(*vals, root.Val)
-	inorder(vals, root.Right)
+	dfs(root.Right, vals)
 }
+
+// @lc code=end
 
 func inorderIteration(root *TreeNode) (vals []int) {
 	stack := []*TreeNode{}
