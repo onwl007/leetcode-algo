@@ -37,7 +37,7 @@ func decodeString(s string) string {
 			strStack = strStack[:len(strStack)-1]
 			num := numStack[len(numStack)-1]
 			numStack = numStack[:len(numStack)-1]
-			res = string(str) + strings.Repeat(res, num)
+			res = str + strings.Repeat(res, num)
 		} else {
 			res += string(s[i])
 		}

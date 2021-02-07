@@ -23,6 +23,87 @@ func getRandNumber(n int) int {
 	return rand.Intn(n)
 }
 
+func bubbleSort(nums []int) {
+	if len(nums) <= 1 {
+		return
+	}
+	for i := 0; i < len(nums); i++ {
+		flag := false
+		for j := 0; j < len(nums)-i-1; j++ {
+			if nums[j] > nums[j+1] {
+				tmp := nums[j]
+				nums[j] = nums[j+1]
+				nums[j+1] = tmp
+				flag = true
+			}
+		}
+		if !flag {
+			break
+		}
+	}
+}
+
+func insertSort(nums []int) {
+	if len(nums) <= 1 {
+		return
+	}
+	for i := 0; i < len(nums); i++ {
+		val := nums[i]
+		j := i - 1
+		for ; j >= 0; j-- {
+			if nums[j] > val {
+				nums[j+1] = nums[j]
+			} else {
+				break
+			}
+		}
+		nums[j+1] = val
+	}
+}
+
+func MergeSort(nums []int) {
+	if len(nums) <= 1 {
+		return
+	}
+	mergeSort(nums, 0, len(nums)-1)
+}
+
+func mergeSort(nums []int, left, right int) {
+	if left >= right {
+		return
+	}
+	mid := (left + right) / 2
+	mergeSort(nums, left, mid)
+	mergeSort(nums, mid+1, right)
+	merge(nums, left, mid, right)
+}
+
+func merge(nums []int, left, mid, right int) {
+	tmp := []int{}
+	i := left
+	j := mid + 1
+	k := 0
+	for ; i <= mid && j <= right; k++ {
+		if nums[i] <= nums[j] {
+			tmp[k] = nums[i]
+			i++
+		} else {
+			tmp[k] = nums[j]
+			j++
+		}
+	}
+
+	for ; i <= mid; i++ {
+		tmp[k] = nums[i]
+		k++
+	}
+	for ; j <= right; j++ {
+		tmp[k] = nums[j]
+		k++
+	}
+	copy(nums[left:right+1], tmp)
+}
+
 func QuickSort(nums []int) {
 	quickSort(nums, 0, len(nums)-1)
 }
@@ -31,16 +112,16 @@ func quickSort(nums []int, left, right int) {
 	if left >= right {
 		return
 	}
-	i := patitation(nums, left, right)
+	i := partition(nums, left, right)
 	quickSort(nums, left, i-1)
 	quickSort(nums, i+1, right)
 }
 
-func patitation(nums []int, left, right int) int {
-	piovt := nums[right]
+func partition(nums []int, left, right int) int {
+	pivot := nums[right]
 	i := left
 	for j := left; j < right; j++ {
-		if nums[j] < piovt {
+		if nums[j] < pivot {
 			nums[i], nums[j] = nums[j], nums[i]
 			i++
 		}
