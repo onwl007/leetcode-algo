@@ -4,9 +4,9 @@ import "sort"
 
 // 哈希表
 func containsDuplicate(nums []int) bool {
-	m := make(map[int]int)
-	for i, v := range nums {
-		m[v] = i
+	m := make(map[int]struct{})
+	for _, v := range nums {
+		m[v] = struct{}{}
 	}
 
 	return len(nums) != len(m)
