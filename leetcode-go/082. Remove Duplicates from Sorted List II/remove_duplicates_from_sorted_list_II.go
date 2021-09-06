@@ -37,3 +37,23 @@ func deleteDuplicates(head *ListNode) *ListNode {
 	}
 	return dummy.Next
 }
+
+func deleteDuplicates1(head *ListNode) *ListNode {
+	dumy := &ListNode{}
+	dumy.Next = head
+	a := dumy
+	b := head
+	for b != nil && b.Next != nil {
+		if a.Next.Val != b.Next.Val {
+			a = a.Next
+			b = b.Next
+		} else {
+			for b != nil && b.Next != nil && a.Next.Val == b.Next.Val {
+				b = b.Next
+			}
+			a.Next = b.Next
+			b = b.Next
+		}
+	}
+	return dumy.Next
+}
