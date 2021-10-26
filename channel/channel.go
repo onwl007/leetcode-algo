@@ -1,52 +1,56 @@
 package main
 
 import (
+	"context"
 	"fmt"
-	"sync"
+	"os"
+
+	"golang.org/x/sync/errgroup"
 )
 
-var wg sync.WaitGroup
+var (
+	Web   = fakeSearch("web")
+	Image = fakeSearch("image")
+	Video = fakeSearch("video")
+)
+
+type Result string
+type Search func(ctx context.Context, query string) (Result, error)
+
+func fakeSearch(kind string) Search {
+	return func(_ context.Context, query string) (Result, error) {
+		return Result(fmt.Sprintf("%s result for %q", kind, query)), nil
+	}
+}
 
 func main() {
-	catch := make(chan int, 1)
-	fishch := make(chan int, 1)
-	dogch := make(chan int, 1)
-	fishch <- 1
+	Google := func(ctx context.Context, query string) ([]Result, error) {
+		g, ctx := errgroup.WithContext(ctx)
 
-	go cat(fishch, catch)
-	go dog(catch, dogch)
-	go fish(dogch, fishch)
-
-	wg.Add(3)
-	wg.Wait()
-}
-
-func cat(fishch, catch chan int) {
-	defer wg.Done()
-	defer close(catch)
-	for i := 0; i < 100; i++ {
-		<-fishch
-		fmt.Println("cat")
-		catch <- 1
+		searches := []Search{Web, Image, Video}
+		results := make([]Result, len(searches))
+		for i, search := range searches {
+			i, search := i, search
+			g.Go(func() error {
+				result, err := search(ctx, query)
+				if err == nil {
+					results[i] = result
+				}
+				return err
+			})
+		}
+		if err := g.Wait(); err != nil {
+			return nil, err
+		}
+		return results, nil
 	}
-}
 
-func dog(catch, dogch chan int) {
-	defer wg.Done()
-	defer close(dogch)
-	for i := 0; i < 100; i++ {
-		<-catch
-		fmt.Println("dog")
-		dogch <- 1
+	results, err := Google(context.Background(), "golang")
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		return
 	}
-}
-
-func fish(dogch, fishch chan int) {
-	defer wg.Done()
-	defer close(fishch)
-	for i := 0; i < 100; i++ {
-		<-dogch
-		fmt.Println("fish")
-		fishch <- 1
+	for _, v := range results {
+		fmt.Println(v)
 	}
 }
